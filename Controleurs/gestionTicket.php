@@ -16,14 +16,19 @@ switch ($action) {
         $sourceDeDonnees = new ticketDAO();
         $ticket=$sourceDeDonnees->prendreTicket($_GET["numTicket"]);
         include("./Vues/ConfTicket.php");
-        break;
+    break;
+    case"resoudreTicket":
+        $sourceDeDonnees = new ticketDAO();
+        $ticket=$sourceDeDonnees->resoudreTicket($_GET["numTicket"]);
+        include("./Vues/ConfTicket.php");
+    break;
     case 'consultation':
         
         $sourceDeDonnees = new ticketDAO();
         $listeTicket = $sourceDeDonnees->getLesTicket();
         include("./vues/visualisationTicket.php");
         break;
-     case 'ticketDetails':
+    case 'ticketDetails':
         
         $sourceDeDonnees = new ticketDAO();
         $listeTicket = $sourceDeDonnees->getLesInfoTicket($_GET['numTicket']);
@@ -38,6 +43,14 @@ switch ($action) {
         $listeTicket = $sourceDeDonnees->AjouterLesTicket($_POST["type"],$_POST['message'],$_POST['titre'],$_POST['priorite']);
         include("./vues/visualisationTicket.php");
         break;
+
+
+    case 'deletTicket':
+        
+            $sourceDeDonnees = new ticketDAO();
+            $listeTicket = $sourceDeDonnees->deletTicket($_GET['numTicket']);
+            include("./vues/loginValidation.php");
+            break;
 
     //         $sourceDeDonnees = new reservationDAO();
     //         include("./vues/formulaireReservation.php");

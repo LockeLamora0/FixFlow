@@ -15,6 +15,14 @@ class ticketDAO extends Base{
         $resultatRequete->bindParam(':num', $numTicket);
         return $resultatRequete->execute(); 
     }
+    public function resoudreTicket($numTicket){
+        $etat = "Fermé";
+        $resultatRequete = $this->prepare("UPDATE `ticket` SET `etat`=:etat,`attributaire`=:nom WHERE numeroTicket=:num");
+        $resultatRequete->bindParam(':etat', $etat);
+        $resultatRequete->bindParam(':nom', $_SESSION['userName']);
+        $resultatRequete->bindParam(':num', $numTicket);
+        return $resultatRequete->execute(); 
+    }
     
     public function getLesTicket() {
         $resultatRequete = $this->prepare("SELECT * FROM `ticket` WHERE idCompte = :id AND tokenEntreprise = :token");
@@ -23,28 +31,32 @@ class ticketDAO extends Base{
         $resultatRequete->execute(); 
         $tableauTicket = $resultatRequete->fetchAll(PDO::FETCH_ASSOC);
         $listeTicket = array();
+    
         foreach ($tableauTicket as $uneLigneTicket) {
-
+            // Crée un objet ticket avec les données récupérées
             $unObjetTicket = new ticket(
                 $uneLigneTicket["numeroTicket"],
                 $uneLigneTicket['etat'],
                 $uneLigneTicket['type'],
                 $uneLigneTicket['Priorité'],
                 $uneLigneTicket['titreTicket'],
-                $uneLigneTicket['message'],
+                $uneLigneTicket['message']
             );
-
-
+    
+            // Définit l'attributaire pour cet objet ticket
+    
+            // Ajoute l'objet ticket à la liste
             $listeTicket[] = $unObjetTicket;
         }
-        $unObjetTicket->setAttributaire($uneLigneTicket['attributaire']);
+    
         return $listeTicket;
     }
+    
     public function getTicketsForTechnicians() {
         // La requête SQL récupère les tickets et le nom des clients
         $resultatRequete = $this->prepare("SELECT ticket.*, Client.Nom FROM `ticket` 
                                            INNER JOIN Client ON Client.idClient = ticket.idCompte 
-                                           WHERE ticket.tokenEntreprise = :token");
+                                           WHERE ticket.tokenEntreprise = :token and `etat` !='Fermé'");
         $resultatRequete->bindParam(':token', $_SESSION['tokenEntreprise']);
         $resultatRequete->execute(); 
         $tableauTicket = $resultatRequete->fetchAll(PDO::FETCH_ASSOC);
@@ -83,6 +95,8 @@ class ticketDAO extends Base{
 
         $unObjetTicket= new ticket($InfoTicket['numeroTicket'],$InfoTicket['etat'],$InfoTicket['type'],$InfoTicket['Priorité'],$InfoTicket['titreTicket'],$InfoTicket['message']);
         $unObjetTicket->setNom($InfoTicket['Nom']);
+        $unObjetTicket->setAttributaire($InfoTicket['attributaire']);
+
         $leTicket = $unObjetTicket;
         return $leTicket;
 
@@ -103,6 +117,11 @@ class ticketDAO extends Base{
         $resultatRequete->execute();
         return $resultatRequete;
     
+    }
+    public function deletTicket($numTicket){
+        $resultatRequete = $this->prepare("DELETE FROM `ticket` WHERE `numeroTicket` = :num");
+        $resultatRequete->bindParam(':num', $numTicket);
+        return $resultatRequete->execute(); 
     }
     // public function AjoutLesTicket($nom,$mdp,$TokenEntreprise,$typeCompte){
     //     $resultatRequete= $this ->exec("INSERT INTO `Client`( `Nom`, `mdp`, `TokenEntreprise`,`typeCompte`) VALUES  ('$nom','$mdp','$TokenEntreprise','$typeCompte')");

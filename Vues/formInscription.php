@@ -90,5 +90,6 @@
         </form>
         <a href="index.php?controleur=Utilisateur&action=loginForm" class="connexion-link">Connexion</a>
     </div>
+    
 </body>
 </html>

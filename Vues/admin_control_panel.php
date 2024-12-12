@@ -8,7 +8,10 @@ echo "</div>";
 
 echo "<div class='tile-container'>"; // Container pour les tiles
 if (empty($listeTicket)) {
-    echo "<p>Aucun ticket disponible</p>";
+    echo "<div class='empty-tickets-container'>";
+    echo '<img src=".\images\no_task.png" alt="Aucun ticket disponible" class="no-task-image">';
+    echo "<p class='no-task-message'>Aucun ticket disponible</p>";
+    echo "</div>";
 } else {
     foreach ($listeTicket as $unTicket) {
         if (is_object($unTicket)) {
@@ -283,4 +286,30 @@ echo "</div>"; // Fin du container des tiles
     .details-button:hover {
         background-color: #2980b9;
     }
+    .empty-tickets-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* S'assure que tout le contenu est centré verticalement sur l'écran */
+    width: 100%; /* S'assure que le contenu est centré horizontalement */
+    margin: 0;
+    padding: 0;
+}
+
+
+.no-task-image {
+    max-width: 150px; /* Ajuster pour réduire la taille de l'image */
+    max-height: 150px; /* Ajuster pour réduire la taille de l'image */
+    width: auto;
+    height: auto;
+    margin-bottom: 10px; /* Espacement entre l'image et le message */
+}
+
+.no-task-message {
+    font-size: 1em;
+    color: #555;
+    margin: 0;
+    line-height: 1.4;
+}
+
 </style>

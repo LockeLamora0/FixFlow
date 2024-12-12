@@ -43,22 +43,48 @@
             color: #34495e;
         }
 
-        .details-link button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
+        /* Styles communs pour tous les boutons */
+        .details-link button,
+        .details-link.disabled-button {
             display: block;
-            margin: 20px auto 0;
+            width: 100%; /* Les boutons occupent toute la largeur */
+            padding: 10px 15px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-align: center;
         }
 
-        .details-link button:hover {
-            background-color: #2980b9;
+        /* Bouton pour "Prendre le ticket" */
+        .details-link .prendre-ticket {
+            background-color: #27ae60;
+            color: white;
         }
+
+        .details-link .prendre-ticket:hover {
+            background-color: #219150;
+        }
+
+        /* Bouton pour "Résoudre le ticket" */
+        .details-link .resoudre-ticket {
+            background-color: #e67e22;
+            color: white;
+        }
+
+        .details-link .resoudre-ticket:hover {
+            background-color: #d2691e;
+        }
+
+        /* Bouton pour "ticket déjà attribué" (désactivé) */
+        .details-link .disabled-button {
+            background-color: #bdc3c7;
+            color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
     </style>
 </head>
 <body>
@@ -85,14 +111,13 @@
             <span>Type :</span> <?= htmlspecialchars($listeTicket->getType()); ?>
         </div>
         <?php 
-        var_dump($listeTicket->getAttributaire());
-            if(is_null($listeTicket->getAttributaire())){
-                echo "<a href='index.php?controleur=ticket&action=prendreTicket&numTicket=" . $listeTicket->getNumeroTicket() . "' class='details-link'><button>Prendre le ticket</button></a>";
-            }else{
-                echo "ee";
-            }
-
-            
+        if(is_null($listeTicket->getAttributaire())){
+            echo "<a href='index.php?controleur=ticket&action=prendreTicket&numTicket=" . $listeTicket->getNumeroTicket() . "' class='details-link'><button class='prendre-ticket'>Prendre le ticket</button></a>";
+        } elseif($listeTicket->getAttributaire() == $_SESSION['userName']){
+            echo "<a href='index.php?controleur=ticket&action=resoudreTicket&numTicket=" . $listeTicket->getNumeroTicket() . "' class='details-link'><button class='resoudre-ticket'>Résoudre le ticket</button></a>";
+        } else {
+            echo "<a href='#' class='details-link'><button class='disabled-button'>Ticket déjà attribué</button></a>";
+        }
         ?>
     </div>
 </body>

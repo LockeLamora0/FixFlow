@@ -13,7 +13,7 @@
 <?php
 
 echo "<table>";
-echo "<tr><th>Numéro</th><th>État</th><th>Type</th></tr>";
+echo "<tr><th>Numéro</th><th>État</th><th>Type</th><th>action</th></tr>";
 
 foreach ($listeTicket as $unTicket) {
     // Assurez-vous que $unTicket est bien un objet
@@ -22,6 +22,7 @@ foreach ($listeTicket as $unTicket) {
         echo "<td>" . $unTicket->getNumeroTicket() . "</td>";
         echo "<td>" . $unTicket->getEtat() . "</td>";
         echo "<td>" . $unTicket->getType() . "</td>";
+        echo "<td>". "<a href='index.php?controleur=ticket&action=deletTicket&numTicket=" . $unTicket->getNumeroTicket() . "' <button> supprimer le ticket</button></a>"."</td>";
         echo "</tr>";
     } else {
         echo "<tr><td colspan='3'>Erreur : élément non valide</td></tr>";
@@ -30,3 +31,6 @@ foreach ($listeTicket as $unTicket) {
 
 echo "</table>";
 ?>
+<style>
+    
+</style>
