@@ -11,22 +11,24 @@ switch ($action) {
         include("./vues/formInscription.php");
     break;
  
+    case 'account':
+        
+        $sourceDeDonnees = new utilisateurDAO();
+        // $user = $sourceDeDonnees->$sourceDeDonnees->getConnexion($_SESSION['userName']);
+        include("./vues/page_compte.php");
+        break;
     case "loginForm":
-        echo"rtty";
         include("./vues/formConnexion.php");
     break;
     
     case 'register':
-        echo'dd';
         $sourceDeDonnees = new utilisateurDAO();
         $mdp =  password_hash($_POST['mdp'], PASSWORD_ARGON2ID);
-        var_dump($mdp);
         $listeReservation = $sourceDeDonnees->AjoutLesUtilisateur($_POST["nomUtilisateur"],$mdp,$_POST["token"],$_POST["typeCompte"]);
         include("./vues/formConnexion.php");
     break;
 
     case "loginUser":
-        echo "login";
 
         $sourceDeDonnees = new utilisateurDAO();
         
@@ -39,8 +41,7 @@ switch ($action) {
                 $_SESSION['userId'] = $user['idClient'];
                 $_SESSION['userName'] = $user['Nom'];
                 $_SESSION['userType'] = $user['typeCompte'];
-                $_SESSION['tokenEntreprise'] = $user['TokenEntreprise'];
-                var_dump($_SESSION['userId'],$_SESSION['userName'],$_SESSION['tokenEntreprise']);
+                $_SESSION['IdEntreprise'] = $user['IdEntreprise'];
                 include('./vues/loginValidation.php');
             }
            

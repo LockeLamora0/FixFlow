@@ -1,19 +1,20 @@
 <?php
 echo "<div class='token-container'>";
-echo "<p class='token-intro'>Voici le token associé à votre entreprise. Utilisez-le pour accéder à vos tickets et autres ressources liées à la gestion de votre support.</p>";
-echo "<span class='token-label'>Le token de votre entreprise :</span> <span id='token' class='token-value'>" . $_SESSION['tokenEntreprise'] . "</span>";
-echo "<button class='copy-button' onclick='copyToken()'>Copier le token</button>";
-echo "<p id='successMessage' class='success-message'>Token copié dans le presse-papiers !</p>";
+echo "<p class='token-intro'>Voici l'ID de votre entreprise. Cet ID a été défini par le technicien. Utilisez-le pour accéder à vos tickets et autres ressources liées à la gestion de votre support.</p>";
+echo "<span class='token-label'>L'ID de votre entreprise :</span> <span id='token' class='token-value'>" . $_SESSION['IdEntreprise'] . "</span>";
+echo "<button class='copy-button' onclick='copyToken()'>Copier l'ID</button>";
+echo "<p id='successMessage' class='success-message'>ID copié dans le presse-papiers !</p>";
 echo "</div>";
 
+
 echo "<div class='tile-container'>"; // Container pour les tiles
-if (empty($listeTicket)) {
+if (empty($ticketsPourTechniciens)) {
     echo "<div class='empty-tickets-container'>";
     echo '<img src=".\images\no_task.png" alt="Aucun ticket disponible" class="no-task-image">';
     echo "<p class='no-task-message'>Aucun ticket disponible</p>";
     echo "</div>";
 } else {
-    foreach ($listeTicket as $unTicket) {
+    foreach ($ticketsPourTechniciens as $unTicket) {
         if (is_object($unTicket)) {
             echo "<div class='ticket-tile'>";
             

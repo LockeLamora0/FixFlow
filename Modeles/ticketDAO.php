@@ -25,9 +25,9 @@ class ticketDAO extends Base{
     }
     
     public function getLesTicket() {
-        $resultatRequete = $this->prepare("SELECT * FROM `ticket` WHERE idCompte = :id AND tokenEntreprise = :token");
+        $resultatRequete = $this->prepare("SELECT * FROM `ticket` WHERE idCompte = :id AND IdEntreprise = :token");
         $resultatRequete->bindParam(':id', $_SESSION['userId']);
-        $resultatRequete->bindParam(':token', $_SESSION['tokenEntreprise']);
+        $resultatRequete->bindParam(':token', $_SESSION['IdEntreprise']);
         $resultatRequete->execute(); 
         $tableauTicket = $resultatRequete->fetchAll(PDO::FETCH_ASSOC);
         $listeTicket = array();
@@ -56,8 +56,8 @@ class ticketDAO extends Base{
         // La requête SQL récupère les tickets et le nom des clients
         $resultatRequete = $this->prepare("SELECT ticket.*, Client.Nom FROM `ticket` 
                                            INNER JOIN Client ON Client.idClient = ticket.idCompte 
-                                           WHERE ticket.tokenEntreprise = :token and `etat` !='Fermé'");
-        $resultatRequete->bindParam(':token', $_SESSION['tokenEntreprise']);
+                                           WHERE ticket.IdEntreprise = :token and `etat` !='Fermé'");
+        $resultatRequete->bindParam(':token', $_SESSION['IdEntreprise']);
         $resultatRequete->execute(); 
         $tableauTicket = $resultatRequete->fetchAll(PDO::FETCH_ASSOC);
     
@@ -105,11 +105,11 @@ class ticketDAO extends Base{
     public function AjouterLesTicket($type,$msg,$titre,$priorite){
         $numTicket = random_int(1000,9999);
         $etat = "En attente";
-        $resultatRequete= $this->prepare("INSERT INTO `ticket` (`numeroTicket`, `etat`, `type`, `tokenEntreprise`, `idCompte`, `message`, `titreTicket`, `Priorité`) VALUES (:numeroTicket, :etat, :type, :tokenEntreprise, :idCompte, :message, :titre, :priorite)");
+        $resultatRequete= $this->prepare("INSERT INTO `ticket` (`numeroTicket`, `etat`, `type`, `IdEntreprise`, `idCompte`, `message`, `titreTicket`, `Priorité`) VALUES (:numeroTicket, :etat, :type, :IdEntreprise, :idCompte, :message, :titre, :priorite)");
         $resultatRequete->bindParam(':numeroTicket', $numTicket);
         $resultatRequete->bindParam(':etat', $etat);
         $resultatRequete->bindParam(':type', $type);
-        $resultatRequete->bindParam(':tokenEntreprise', $_SESSION['tokenEntreprise']);
+        $resultatRequete->bindParam(':IdEntreprise', $_SESSION['IdEntreprise']);
         $resultatRequete->bindParam(':idCompte', $_SESSION['userId']);
         $resultatRequete->bindParam(':message', $msg);
         $resultatRequete->bindParam(':titre', $titre);
@@ -123,8 +123,8 @@ class ticketDAO extends Base{
         $resultatRequete->bindParam(':num', $numTicket);
         return $resultatRequete->execute(); 
     }
-    // public function AjoutLesTicket($nom,$mdp,$TokenEntreprise,$typeCompte){
-    //     $resultatRequete= $this ->exec("INSERT INTO `Client`( `Nom`, `mdp`, `TokenEntreprise`,`typeCompte`) VALUES  ('$nom','$mdp','$TokenEntreprise','$typeCompte')");
+    // public function AjoutLesTicket($nom,$mdp,$IdEntreprise,$typeCompte){
+    //     $resultatRequete= $this ->exec("INSERT INTO `Client`( `Nom`, `mdp`, `IdEntreprise`,`typeCompte`) VALUES  ('$nom','$mdp','$IdEntreprise','$typeCompte')");
     //     return $resultatRequete;
     // }
 

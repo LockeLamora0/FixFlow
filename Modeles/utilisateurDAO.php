@@ -9,9 +9,9 @@ class utilisateurDAO extends Base{
     }
     
 
-    public function AjoutLesUtilisateur($nom,$mdp,$TokenEntreprise,$typeCompte){
+    public function AjoutLesUtilisateur($nom,$mdp,$IdEntreprise,$typeCompte){
         
-        $resultatRequete= $this ->exec("INSERT INTO `Client`( `Nom`, `mdp`, `TokenEntreprise`, `typeCompte`) VALUES ('$nom','$mdp','$TokenEntreprise','$typeCompte')");
+        $resultatRequete= $this ->exec("INSERT INTO `Client`( `Nom`, `mdp`, `IdEntreprise`, `typeCompte`) VALUES ('$nom','$mdp','$IdEntreprise','$typeCompte')");
         
         return $resultatRequete;
     }
@@ -26,7 +26,7 @@ class utilisateurDAO extends Base{
                 $uneLigneClient["id"],
                 $uneLigneClient['Nom'],
                 $uneLigneClient['mdp'],
-                $uneLigneClient['TokenEntreprise'],
+                $uneLigneClient['IdEntreprise'],
                 $uneLigneClient['typeCompte'],
                 
             );

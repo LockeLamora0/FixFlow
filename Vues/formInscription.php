@@ -81,11 +81,14 @@
             <input type="text" id="token" name="token" placeholder="Token de votre entreprise">
 
             <label>Type de compte :</label>
-            <input type="radio" id="compteAdmin" name="typeCompte" value="1">
             <label for="compteAdmin">Technicien</label>
-            <input type="radio" id="compteUtilisateur" name="typeCompte" value="0" checked>
-            <label for="compteUtilisateur">Utilisateur</label><br><br>
 
+            <input type="radio" id="compteAdmin" name="typeCompte" value="1">
+            <label for="compteUtilisateur">Utilisateur</label>
+            
+            <input type="radio" id="compteUtilisateur" name="typeCompte" value="0" checked>
+<br>
+<br>
             <input type="submit" value="Inscription">
         </form>
         <a href="index.php?controleur=Utilisateur&action=loginForm" class="connexion-link">Connexion</a>

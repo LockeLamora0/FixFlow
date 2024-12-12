@@ -90,31 +90,31 @@
 <body>
     <div class="ticket-container">
         <div class="ticket-header">
-            <h4>Ticket #<?= htmlspecialchars($listeTicket->getNumeroTicket()); ?></h4>
+            <h4>Ticket #<?= htmlspecialchars($ticketDetails->getNumeroTicket()); ?></h4>
         </div>
         <div class="ticket-detail">
-            <span>Titre :</span> <?= htmlspecialchars($listeTicket->getTitre()); ?>
+            <span>Titre :</span> <?= htmlspecialchars($ticketDetails->getTitre()); ?>
         </div>
         <div class="ticket-detail">
-            <span>État :</span> <?= htmlspecialchars($listeTicket->getEtat()); ?>
+            <span>État :</span> <?= htmlspecialchars($ticketDetails->getEtat()); ?>
         </div>
         <div class="ticket-detail">
-            <span>Message :</span> <?= htmlspecialchars($listeTicket->getMsg()); ?>
+            <span>Message :</span> <?= htmlspecialchars($ticketDetails->getMsg()); ?>
         </div>
         <div class="ticket-detail">
-            <span>Nom du demandeur :</span> <?= htmlspecialchars($listeTicket->getNom()); ?>
+            <span>Nom du demandeur :</span> <?= htmlspecialchars($ticketDetails->getNom()); ?>
         </div>
         <div class="ticket-detail">
-            <span>Priorité :</span> <?= htmlspecialchars($listeTicket->getPriorite()); ?>
+            <span>Priorité :</span> <?= htmlspecialchars($ticketDetails->getPriorite()); ?>
         </div>
         <div class="ticket-detail">
-            <span>Type :</span> <?= htmlspecialchars($listeTicket->getType()); ?>
+            <span>Type :</span> <?= htmlspecialchars($ticketDetails->getType()); ?>
         </div>
         <?php 
-        if(is_null($listeTicket->getAttributaire())){
-            echo "<a href='index.php?controleur=ticket&action=prendreTicket&numTicket=" . $listeTicket->getNumeroTicket() . "' class='details-link'><button class='prendre-ticket'>Prendre le ticket</button></a>";
-        } elseif($listeTicket->getAttributaire() == $_SESSION['userName']){
-            echo "<a href='index.php?controleur=ticket&action=resoudreTicket&numTicket=" . $listeTicket->getNumeroTicket() . "' class='details-link'><button class='resoudre-ticket'>Résoudre le ticket</button></a>";
+        if(is_null($ticketDetails->getAttributaire())){
+            echo "<a href='index.php?controleur=ticket&action=prendreTicket&numTicket=" . $ticketDetails->getNumeroTicket() . "' class='details-link'><button class='prendre-ticket'>Prendre le ticket</button></a>";
+        } elseif($ticketDetails->getAttributaire() == $_SESSION['userName']){
+            echo "<a href='index.php?controleur=ticket&action=resoudreTicket&numTicket=" . $ticketDetails->getNumeroTicket() . "' class='details-link'><button class='resoudre-ticket'>Résoudre le ticket</button></a>";
         } else {
             echo "<a href='#' class='details-link'><button class='disabled-button'>Ticket déjà attribué</button></a>";
         }
