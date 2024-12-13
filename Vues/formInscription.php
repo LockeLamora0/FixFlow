@@ -78,7 +78,7 @@
             <input type="text" id="mdp" name="mdp" placeholder="Mot de passe">
 
             <label for="lieu">ID de votre entreprise :</label>
-            <input type="text" id="token" name="token" placeholder="ID de votre entreprise">
+            <input type="text" id="IdEntreprise" name="IdEntreprise" placeholder="ID de votre entreprise">
 
             <label>Type de compte :</label>
             <label for="compteAdmin">Technicien</label>

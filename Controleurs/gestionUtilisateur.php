@@ -24,7 +24,7 @@ switch ($action) {
     case 'register':
         $sourceDeDonnees = new utilisateurDAO();
         $mdp =  password_hash($_POST['mdp'], PASSWORD_ARGON2ID);
-        $listeReservation = $sourceDeDonnees->AjoutLesUtilisateur($_POST["nomUtilisateur"],$mdp,$_POST["token"],$_POST["typeCompte"]);
+        $listeReservation = $sourceDeDonnees->AjoutLesUtilisateur($_POST["nomUtilisateur"],$mdp,$_POST["IdEntreprise"],$_POST["typeCompte"]);
         include("./vues/formConnexion.php");
     break;
 

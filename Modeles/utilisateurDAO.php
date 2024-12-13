@@ -15,8 +15,8 @@ class utilisateurDAO extends Base{
         
         return $resultatRequete;
     }
-    public function getLesUtilisateur($token) {
-        $resultatRequete = $this->query("SELECT * FROM `Client` where 'tokenUtilisateur' = '$token'");
+    public function getLesUtilisateur($IdEntreprise) {
+        $resultatRequete = $this->query("SELECT * FROM `Client` where 'IdEntrepriseUtilisateur' = '$IdEntreprise'");
         $tableauClient = $resultatRequete->fetchAll();
         $listeTicket = array();
     

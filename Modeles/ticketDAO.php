@@ -25,9 +25,9 @@ class ticketDAO extends Base{
     }
     
     public function getLesTicket() {
-        $resultatRequete = $this->prepare("SELECT * FROM `ticket` WHERE idCompte = :id AND IdEntreprise = :token");
+        $resultatRequete = $this->prepare("SELECT * FROM `ticket` WHERE idCompte = :id AND IdEntreprise = :IdEntreprise");
         $resultatRequete->bindParam(':id', $_SESSION['userId']);
-        $resultatRequete->bindParam(':token', $_SESSION['IdEntreprise']);
+        $resultatRequete->bindParam(':IdEntreprise', $_SESSION['IdEntreprise']);
         $resultatRequete->execute(); 
         $tableauTicket = $resultatRequete->fetchAll(PDO::FETCH_ASSOC);
         $listeTicket = array();
@@ -56,8 +56,8 @@ class ticketDAO extends Base{
         // La requête SQL récupère les tickets et le nom des clients
         $resultatRequete = $this->prepare("SELECT ticket.*, Client.Nom FROM `ticket` 
                                            INNER JOIN Client ON Client.idClient = ticket.idCompte 
-                                           WHERE ticket.IdEntreprise = :token and `etat` !='Fermé'");
-        $resultatRequete->bindParam(':token', $_SESSION['IdEntreprise']);
+                                           WHERE ticket.IdEntreprise = :IdEntreprise and `etat` !='Fermé'");
+        $resultatRequete->bindParam(':IdEntreprise', $_SESSION['IdEntreprise']);
         $resultatRequete->execute(); 
         $tableauTicket = $resultatRequete->fetchAll(PDO::FETCH_ASSOC);
     

@@ -1,8 +1,8 @@
 <?php
-echo "<div class='token-container'>";
-echo "<p class='token-intro'>Voici l'ID de votre entreprise. Cet ID a été défini par le technicien. Utilisez-le pour accéder à vos tickets et autres ressources liées à la gestion de votre support.</p>";
-echo "<span class='token-label'>L'ID de votre entreprise :</span> <span id='token' class='token-value'>" . $_SESSION['IdEntreprise'] . "</span>";
-echo "<button class='copy-button' onclick='copyToken()'>Copier l'ID</button>";
+echo "<div class='IdEntreprise-container'>";
+echo "<p class='IdEntreprise-intro'>Voici l'ID de votre entreprise. Cet ID a été défini par le technicien. Utilisez-le pour accéder à vos tickets et autres ressources liées à la gestion de votre support.</p>";
+echo "<span class='IdEntreprise-label'>L'ID de votre entreprise :</span> <span id='IdEntreprise' class='IdEntreprise-value'>" . $_SESSION['IdEntreprise'] . "</span>";
+echo "<button class='copy-button' onclick='copyIdEntreprise()'>Copier l'ID</button>";
 echo "<p id='successMessage' class='success-message'>ID copié dans le presse-papiers !</p>";
 echo "</div>";
 
@@ -65,11 +65,11 @@ echo "</div>";
 ?>
 
 <script>
-    function copyToken() {
-        const tokenText = document.getElementById('token').textContent;
+    function copyIdEntreprise() {
+        const IdEntrepriseText = document.getElementById('IdEntreprise').textContent;
 
         const tempInput = document.createElement('input');
-        tempInput.value = tokenText;
+        tempInput.value = IdEntrepriseText;
         document.body.appendChild(tempInput);
 
         tempInput.select();
@@ -88,8 +88,8 @@ echo "</div>";
 </script>
 
 <style>
-    /* Container pour le token */
-    .token-container {
+    /* Container pour le IdEntreprise */
+    .IdEntreprise-container {
         margin: 30px 0;
         padding: 20px;
         background-color: #f1f1f1;
@@ -101,7 +101,7 @@ echo "</div>";
         margin-right: auto;
     }
 
-    .token-intro {
+    .IdEntreprise-intro {
         font-size: 1.1em;
         color: #333;
         margin-bottom: 15px;
@@ -110,13 +110,13 @@ echo "</div>";
         font-weight: 400;
     }
 
-    .token-label {
+    .IdEntreprise-label {
         font-weight: 600;
         font-size: 1.2em;
         color: #2c3e50;
     }
 
-    .token-value {
+    .IdEntreprise-value {
         font-size: 1.3em;
         font-weight: bold;
         color: #2980b9;
