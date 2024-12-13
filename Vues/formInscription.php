@@ -77,8 +77,8 @@
             <label for="nbPlace">Mot de passe :</label>
             <input type="text" id="mdp" name="mdp" placeholder="Mot de passe">
 
-            <label for="lieu">Token de votre entreprise :</label>
-            <input type="text" id="token" name="token" placeholder="Token de votre entreprise">
+            <label for="lieu">ID de votre entreprise :</label>
+            <input type="text" id="token" name="token" placeholder="ID de votre entreprise">
 
             <label>Type de compte :</label>
             <label for="compteAdmin">Technicien</label>

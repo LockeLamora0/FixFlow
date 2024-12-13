@@ -7,7 +7,7 @@ echo "<p id='successMessage' class='success-message'>ID copié dans le presse-pa
 echo "</div>";
 
 
-echo "<div class='tile-container'>"; // Container pour les tiles
+echo "<div class='tile-container'>"; 
 if (empty($ticketsPourTechniciens)) {
     echo "<div class='empty-tickets-container'>";
     echo '<img src=".\images\no_task.png" alt="Aucun ticket disponible" class="no-task-image">';
@@ -18,16 +18,13 @@ if (empty($ticketsPourTechniciens)) {
         if (is_object($unTicket)) {
             echo "<div class='ticket-tile'>";
             
-            // Affichage du numéro du ticket et du nom de l'utilisateur dans une seule ligne
             echo "<div class='ticket-header'>";
             echo "<h4>Ticket #" . $unTicket->getNumeroTicket() . "</h4>";
             echo "<p class='ticket-user'>" . $unTicket->getNom() . "</p>";
             echo "</div>";
     
-            // Affichage du titre du ticket
             echo "<p class='ticket-title'>" . $unTicket->getTitre() . "</p>";
     
-            // Déterminer la classe du badge selon la priorité
             $importance = $unTicket->getPriorite(); 
             $badgeClass = '';
     
@@ -48,51 +45,42 @@ if (empty($ticketsPourTechniciens)) {
     
             $typeIntervention = $unTicket->getType(); 
     
-            // Affichage du badge et du type d'intervention
             echo "<div class='badge-container'>";
             echo "<span class='badge $badgeClass'>$importance</span>";
             echo "<span class='type-intervention'>$typeIntervention</span>";
-            echo "</div>"; // Fin du container badge + type
+            echo "</div>"; 
     
-            // Bouton pour voir plus de détails
             echo "<a href='index.php?controleur=ticket&action=ticketDetails&numTicket=".$unTicket->getNumeroTicket()."' class='details-link'>
                     <button class='details-button'>Voir Détails</button>
                   </a>";
     
-            echo "</div>"; // Fin de la tile
+            echo "</div>"; 
         } else {
             echo "<p>Erreur : élément non valide</p>";
         }
     }
 }
 
-echo "</div>"; // Fin du container des tiles
+echo "</div>"; 
 ?>
 
-<!-- JavaScript pour copier le token -->
 <script>
     function copyToken() {
-        // Récupère le texte du token
         const tokenText = document.getElementById('token').textContent;
 
-        // Crée un élément temporaire pour copier le texte
         const tempInput = document.createElement('input');
         tempInput.value = tokenText;
         document.body.appendChild(tempInput);
 
-        // Sélectionne et copie le texte
         tempInput.select();
-        tempInput.setSelectionRange(0, 99999); // Pour les navigateurs mobiles
+        tempInput.setSelectionRange(0, 99999);
         document.execCommand('copy');
 
-        // Supprime l'élément temporaire
         document.body.removeChild(tempInput);
 
-        // Affiche le message de succès
         const successMessage = document.getElementById('successMessage');
         successMessage.style.display = 'block';
 
-        // Cache le message après 3 secondes
         setTimeout(() => {
             successMessage.style.display = 'none';
         }, 3000);
