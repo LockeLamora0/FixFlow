@@ -123,7 +123,6 @@
         </ul>
     </nav>
     <?php
-                // si aucune information n'est présente dans l'url, le controleur par défaut sera "accueil"
                 if (isset($_GET['controleur']))
                     $controleur = filter_var($_GET['controleur'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 else
