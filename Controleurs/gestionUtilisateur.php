@@ -14,13 +14,22 @@ switch ($action) {
     case 'account':
         
         $sourceDeDonnees = new utilisateurDAO();
-        // $user = $sourceDeDonnees->$sourceDeDonnees->getConnexion($_SESSION['userName']);
+        $user = $sourceDeDonnees->getLesInfoCompte($_SESSION['userName']);
         include("./vues/page_compte.php");
         break;
+    case "ModifierIdEntreprise ":
+        $sourceDeDonnees = new utilisateurDAO();
+        $user = $sourceDeDonnees->updateEntrepriseId ($_SESSION['userName'],$_POST['id']);
+        include("./vues/page_compte.php");
+    break;
+    case "ModifierMotDePasse ":
+        $sourceDeDonnees = new utilisateurDAO();
+        $user = $sourceDeDonnees->updateMotDePasse ($_SESSION['userName'],$_POST['mdp']);
+        include("./vues/page_compte.php");
+    break;
     case "loginForm":
         include("./vues/formConnexion.php");
     break;
-    
     case 'register':
         $sourceDeDonnees = new utilisateurDAO();
         $mdp =  password_hash($_POST['mdp'], PASSWORD_ARGON2ID);
