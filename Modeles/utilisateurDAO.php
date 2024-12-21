@@ -10,17 +10,19 @@ class utilisateurDAO extends Base{
     
     public function updateEntrepriseId ($userName,$id){
         
-        $resultatRequete=  $this->prepare("UPDATE `Client` SET `IdEntreprise`=:id WHERE `Nom`=:nom");
+        $resultatRequete=  $this->prepare("UPDATE `Client` SET `IdEntreprise`= :id WHERE `Nom`= :nom");
         $resultatRequete->bindParam(':id', $id);
         $resultatRequete->bindParam(':nom', $userName);
+        $resultatRequete->execute();
         
         return $resultatRequete;
     }
     public function updateMotDePasse ($userName,$mdp){
         
-        $resultatRequete=  $this->prepare("UPDATE `Client` SET `mdp`=:mdp WHERE `Nom`=:nom");
+        $resultatRequete=  $this->prepare("UPDATE `Client` SET `mdp`= :mdp WHERE `Nom`= :nom");
         $resultatRequete->bindParam(':mdp', $mdp);
         $resultatRequete->bindParam(':nom', $userName);
+        $resultatRequete->execute();
         
         return $resultatRequete;
     }
@@ -38,7 +40,7 @@ class utilisateurDAO extends Base{
         foreach ($tableauClient as $uneLigneClient) {
             // Créez un objet ticket pour chaque ligne
             $unObjetClient = new utilisateur(
-                $uneLigneClient["id"],
+                $uneLigneClient["idClient "],
                 $uneLigneClient['Nom'],
                 $uneLigneClient['mdp'],
                 $uneLigneClient['IdEntreprise'],
@@ -80,7 +82,7 @@ class utilisateurDAO extends Base{
         // Récupérer les résultats
         $connexion = $resultatRequete->fetch();
         if ($connexion) {
-            $unObjetClient = new utilisateur($connexion["id"], $connexion['Nom'], $connexion['mdp'], $connexion['IdEntreprise'], $connexion["typeCompte"]);
+            $unObjetClient = new utilisateur($connexion["idClient"], $connexion['Nom'], $connexion['mdp'], $connexion['IdEntreprise'], $connexion["typeCompte"]);
             return $unObjetClient;
         } else {
             return null;

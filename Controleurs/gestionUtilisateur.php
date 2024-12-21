@@ -12,20 +12,25 @@ switch ($action) {
     break;
  
     case 'account':
-        
         $sourceDeDonnees = new utilisateurDAO();
         $user = $sourceDeDonnees->getLesInfoCompte($_SESSION['userName']);
         include("./vues/page_compte.php");
         break;
-    case "ModifierIdEntreprise ":
+    case "modifierIdEntreprise":
+       
         $sourceDeDonnees = new utilisateurDAO();
-        $user = $sourceDeDonnees->updateEntrepriseId ($_SESSION['userName'],$_POST['id']);
-        include("./vues/page_compte.php");
+        $user = $sourceDeDonnees->updateEntrepriseId ($_SESSION['userName'], $_POST['id']);
+        // var_dump($_SESSION['userName'], $_POST['id'],$user);
+        $_SESSION['IdEntreprise'] = $_POST['id'];
+
+        include("./vues/confModification.php");
     break;
-    case "ModifierMotDePasse ":
+    case "modifierMotDePasse":
+        $mdp =  password_hash($_POST['mdp'], PASSWORD_ARGON2ID);
+        // var_dump($mdp,$_SESSION['userName']);
         $sourceDeDonnees = new utilisateurDAO();
-        $user = $sourceDeDonnees->updateMotDePasse ($_SESSION['userName'],$_POST['mdp']);
-        include("./vues/page_compte.php");
+        $user = $sourceDeDonnees->updateMotDePasse ($_SESSION['userName'],$mdp);
+        include("./vues/confModification.php");
     break;
     case "loginForm":
         include("./vues/formConnexion.php");
