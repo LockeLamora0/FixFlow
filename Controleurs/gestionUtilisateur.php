@@ -35,6 +35,10 @@ switch ($action) {
     case "loginForm":
         include("./vues/formConnexion.php");
     break;
+    case "deconnexion":
+        session_destroy();
+        include("./vues/formConnexion.php");
+    break;
     case 'register':
         $sourceDeDonnees = new utilisateurDAO();
         $mdp =  password_hash($_POST['mdp'], PASSWORD_ARGON2ID);

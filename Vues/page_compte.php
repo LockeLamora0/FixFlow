@@ -17,6 +17,10 @@
         <input type="password" id="mdp" name="mdp">
         <input type="submit" value="Modifier">
     </form>
+    <h3>se déconnecter</h3>
+    <form action="index.php?controleur=Utilisateur&action=deconnexion"method="POST">
+        <input type="submit" value="Déconnexion">
+    </form>
 </div>
 <style>
     .account-container {
