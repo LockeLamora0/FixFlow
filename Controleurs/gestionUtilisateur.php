@@ -14,7 +14,7 @@ switch ($action) {
     case 'account':
         $sourceDeDonnees = new utilisateurDAO();
         $user = $sourceDeDonnees->getLesInfoCompte($_SESSION['userName']);
-        include("./vues/page_compte.php");
+        include("./vues/account_page.php");
         break;
     case "modifierIdEntreprise":
        
@@ -23,14 +23,14 @@ switch ($action) {
         // var_dump($_SESSION['userName'], $_POST['id'],$user);
         $_SESSION['IdEntreprise'] = $_POST['id'];
 
-        include("./vues/confModification.php");
+        include("./vues/confirm_ticket_edit.php");
     break;
     case "modifierMotDePasse":
         $mdp =  password_hash($_POST['mdp'], PASSWORD_ARGON2ID);
         // var_dump($mdp,$_SESSION['userName']);
         $sourceDeDonnees = new utilisateurDAO();
         $user = $sourceDeDonnees->updateMotDePasse ($_SESSION['userName'],$mdp);
-        include("./vues/confModification.php");
+        include("./vues/confirm_ticket_edit.php");
     break;
     case "loginForm":
         include("./vues/formConnexion.php");
@@ -56,7 +56,7 @@ switch ($action) {
             if($validationMdp == true){
                 $_SESSION["Connected"] = true;
 
-                $_SESSION['userId'] = $user['idClient'];
+                $_SESSION['userId'] = $user['idCompte'];
                 $_SESSION['userName'] = $user['Nom'];
                 $_SESSION['userType'] = $user['typeCompte'];
                 $_SESSION['IdEntreprise'] = $user['IdEntreprise'];

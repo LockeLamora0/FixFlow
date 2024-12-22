@@ -11,19 +11,19 @@ switch ($action) {
     case "adminConsultation":
         $ticketDAO = new ticketDAO();
         $ticketsPourTechniciens = $ticketDAO->getTicketsForTechnicians();
-        include("./Vues/admin_control_panel.php");
+        include("./Vues/admin_dashboard.php");
         break;
 
     case "prendreTicket":
         $ticketDAO = new ticketDAO();
         $ticketDetails = $ticketDAO->prendreTicket($_GET["numTicket"]);
-        include("./Vues/ConfTicket.php");
+        include("./Vues/confirm_ticket_action.php");
         break;
 
     case "resoudreTicket":
         $ticketDAO = new ticketDAO();
         $ticketDetails = $ticketDAO->resoudreTicket($_GET["numTicket"]);
-        include("./Vues/ConfTicket.php");
+        include("./Vues/confirm_ticket_action.php");
         break;
 
     case 'consultation':
@@ -45,13 +45,13 @@ switch ($action) {
     case "addTicket":
         $ticketDAO = new ticketDAO();
         $ticketCreation = $ticketDAO->AjouterLesTicket($_POST["type"], $_POST['message'], $_POST['titre'], $_POST['priorite']);
-        include("./vues/ConfCreationTicket.php");
+        include("./vues/confirm_ticket_creation.php");
         break;
 
     case 'deletTicket':
         $ticketDAO = new ticketDAO();
         $ticketSuppression = $ticketDAO->deletTicket($_GET['numTicket']);
-        include("./vues/ConfSupTicket.php");
+        include("./vues/confirm_ticket_deletion.php");
         break;
 
     

@@ -53,9 +53,9 @@ class ticketDAO extends Base{
     }
     
     public function getTicketsForTechnicians() {
-        // La requête SQL récupère les tickets et le nom des clients
-        $resultatRequete = $this->prepare("SELECT ticket.*, Client.Nom FROM `ticket` 
-                                           INNER JOIN Client ON Client.idClient = ticket.idCompte 
+        // La requête SQL récupère les tickets et le nom des Comptes
+        $resultatRequete = $this->prepare("SELECT ticket.*, Compte.Nom FROM `ticket` 
+                                           INNER JOIN Compte ON Compte.idCompte = ticket.idCompte 
                                            WHERE ticket.IdEntreprise = :IdEntreprise and `etat` !='Fermé'");
         $resultatRequete->bindParam(':IdEntreprise', $_SESSION['IdEntreprise']);
         $resultatRequete->execute(); 
@@ -85,8 +85,8 @@ class ticketDAO extends Base{
         return $listeTicket;
     }
     public function getLesInfoTicket($id){
-        $resultatRequete = $this->prepare("SELECT ticket.*, Client.Nom FROM `ticket` 
-        INNER JOIN Client ON Client.idClient = ticket.idCompte 
+        $resultatRequete = $this->prepare("SELECT ticket.*, Compte.Nom FROM `ticket` 
+        INNER JOIN Compte ON Compte.idCompte = ticket.idCompte 
         WHERE ticket.numeroTicket = :numTicket");
         $resultatRequete->bindParam(':numTicket', $id);
         $resultatRequete->execute(); 
@@ -124,7 +124,7 @@ class ticketDAO extends Base{
         return $resultatRequete->execute(); 
     }
     // public function AjoutLesTicket($nom,$mdp,$IdEntreprise,$typeCompte){
-    //     $resultatRequete= $this ->exec("INSERT INTO `Client`( `Nom`, `mdp`, `IdEntreprise`,`typeCompte`) VALUES  ('$nom','$mdp','$IdEntreprise','$typeCompte')");
+    //     $resultatRequete= $this ->exec("INSERT INTO `Compte`( `Nom`, `mdp`, `IdEntreprise`,`typeCompte`) VALUES  ('$nom','$mdp','$IdEntreprise','$typeCompte')");
     //     return $resultatRequete;
     // }
 

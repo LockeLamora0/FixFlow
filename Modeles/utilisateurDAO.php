@@ -10,7 +10,7 @@ class utilisateurDAO extends Base{
     
     public function updateEntrepriseId ($userName,$id){
         
-        $resultatRequete=  $this->prepare("UPDATE `Client` SET `IdEntreprise`= :id WHERE `Nom`= :nom");
+        $resultatRequete=  $this->prepare("UPDATE `Compte` SET `IdEntreprise`= :id WHERE `Nom`= :nom");
         $resultatRequete->bindParam(':id', $id);
         $resultatRequete->bindParam(':nom', $userName);
         $resultatRequete->execute();
@@ -19,7 +19,7 @@ class utilisateurDAO extends Base{
     }
     public function updateMotDePasse ($userName,$mdp){
         
-        $resultatRequete=  $this->prepare("UPDATE `Client` SET `mdp`= :mdp WHERE `Nom`= :nom");
+        $resultatRequete=  $this->prepare("UPDATE `Compte` SET `mdp`= :mdp WHERE `Nom`= :nom");
         $resultatRequete->bindParam(':mdp', $mdp);
         $resultatRequete->bindParam(':nom', $userName);
         $resultatRequete->execute();
@@ -28,34 +28,34 @@ class utilisateurDAO extends Base{
     }
     public function AjoutLesUtilisateur($nom,$mdp,$IdEntreprise,$typeCompte){
         
-        $resultatRequete= $this ->exec("INSERT INTO `Client`( `Nom`, `mdp`, `IdEntreprise`, `typeCompte`) VALUES ('$nom','$mdp','$IdEntreprise','$typeCompte')");
+        $resultatRequete= $this ->exec("INSERT INTO `Compte`( `Nom`, `mdp`, `IdEntreprise`, `typeCompte`) VALUES ('$nom','$mdp','$IdEntreprise','$typeCompte')");
         
         return $resultatRequete;
     }
     public function getLesUtilisateur($IdEntreprise) {
-        $resultatRequete = $this->query("SELECT * FROM `Client` where 'IdEntrepriseUtilisateur' = '$IdEntreprise'");
-        $tableauClient = $resultatRequete->fetchAll();
-        $listeClient = array();
+        $resultatRequete = $this->query("SELECT * FROM `Compte` where 'IdEntrepriseUtilisateur' = '$IdEntreprise'");
+        $tableauCompte = $resultatRequete->fetchAll();
+        $listeCompte = array();
     
-        foreach ($tableauClient as $uneLigneClient) {
+        foreach ($tableauCompte as $uneLigneCompte) {
             // Créez un objet ticket pour chaque ligne
-            $unObjetClient = new utilisateur(
-                $uneLigneClient["idClient "],
-                $uneLigneClient['Nom'],
-                $uneLigneClient['mdp'],
-                $uneLigneClient['IdEntreprise'],
-                $uneLigneClient['typeCompte'],
+            $unObjetCompte = new utilisateur(
+                $uneLigneCompte["idCompte "],
+                $uneLigneCompte['Nom'],
+                $uneLigneCompte['mdp'],
+                $uneLigneCompte['IdEntreprise'],
+                $uneLigneCompte['typeCompte'],
                 
             );
     
             // Ajoutez l'objet à la liste
-            $listeClient[] = $unObjetClient;
+            $listeCompte[] = $unObjetCompte;
         }
         
-        return $listeClient;
+        return $listeCompte;
     }
     public function getConnexion($nom){
-        $resultatRequete = $this->prepare("SELECT * FROM `Client` WHERE `Nom` = :nom");
+        $resultatRequete = $this->prepare("SELECT * FROM `Compte` WHERE `Nom` = :nom");
 
         // Liaison des paramètres
         $resultatRequete->bindParam(':nom', $nom, PDO::PARAM_STR);
@@ -72,7 +72,7 @@ class utilisateurDAO extends Base{
         }
     }
     public function getLesInfoCompte($nom){
-        $resultatRequete = $this->prepare("SELECT * FROM `Client` WHERE `Nom` = :nom");
+        $resultatRequete = $this->prepare("SELECT * FROM `Compte` WHERE `Nom` = :nom");
 
         // Liaison des paramètres
         $resultatRequete->bindParam(':nom', $nom, PDO::PARAM_STR);
@@ -82,8 +82,8 @@ class utilisateurDAO extends Base{
         // Récupérer les résultats
         $connexion = $resultatRequete->fetch();
         if ($connexion) {
-            $unObjetClient = new utilisateur($connexion["idClient"], $connexion['Nom'], $connexion['mdp'], $connexion['IdEntreprise'], $connexion["typeCompte"]);
-            return $unObjetClient;
+            $unObjetCompte = new utilisateur($connexion["idCompte"], $connexion['Nom'], $connexion['mdp'], $connexion['IdEntreprise'], $connexion["typeCompte"]);
+            return $unObjetCompte;
         } else {
             return null;
         }

@@ -32,7 +32,7 @@ if (empty($ticketsPourTechniciens)) {
                 case 'Urgent':
                     $badgeClass = 'badge-high';
                     break;
-                case 'Normal':
+                case 'Moyenne':
                     $badgeClass = 'badge-medium';
                     break;
                 case 'Faible':
